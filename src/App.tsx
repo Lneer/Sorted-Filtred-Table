@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
-import { Table } from './components';
+import { Filter, Pagination, Table } from './components';
 import { Tabledata } from './types/types';
 
 const sampleTable: Tabledata[] = [
@@ -35,7 +35,14 @@ const sampleTable: Tabledata[] = [
 ];
 
 function App() {
-  return <Table tableData={sampleTable} />;
+  const [filtredData, setFiltredData] = useState(sampleTable);
+  return (
+    <>
+      <Filter data={sampleTable} onSorted={(data) => setFiltredData(data)} />
+      <Table tableData={filtredData} />
+      <Pagination />
+    </>
+  );
 }
 
 export default App;
