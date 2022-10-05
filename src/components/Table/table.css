@@ -1,0 +1,33 @@
+table{
+	width: 25vw;
+	border-collapse: collapse;
+}
+
+.table td{
+	text-align: center;
+	min-width: fit-content;
+	width: 25%;
+}
+
+.table th{
+	padding: 5px;
+	border: 2px solid black;
+}
+
+.table th:hover {
+	background-color:#eee ;
+	cursor: pointer;
+}
+
+tbody td {
+  padding: 0.5em;
+  border-bottom: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  border-left: 1px solid #ccc;
+}
+
+tbody tr:hover {
+  background-color: #eee;
+}
+
+

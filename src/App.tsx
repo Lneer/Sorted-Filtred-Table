@@ -1,26 +1,41 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { Table } from './components';
+import { Tabledata } from './types/types';
+
+const sampleTable: Tabledata[] = [
+  {
+    id: 1,
+    date: '02.03.2020',
+    name: 'New-Yourk',
+    quantity: 5,
+    distance: 500,
+  },
+  {
+    id: 2,
+    date: '04.03.2020',
+    name: 'Berlin',
+    quantity: 15,
+    distance: 200,
+  },
+  {
+    id: 3,
+    date: '02.03.2020',
+    name: 'London',
+    quantity: 2,
+    distance: 300,
+  },
+  {
+    id: 4,
+    date: '02.04.2020',
+    name: 'Praga',
+    quantity: 10,
+    distance: 250,
+  },
+];
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  return <Table tableData={sampleTable} />;
 }
 
 export default App;

@@ -1,0 +1,12 @@
+.sorter{
+	display: inline-flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.sorter-img {
+	width:12px;
+}
+.checked{
+	filter: invert(46%) sepia(97%) saturate(1713%) hue-rotate(160deg) brightness(93%) contrast(101%);
+}
