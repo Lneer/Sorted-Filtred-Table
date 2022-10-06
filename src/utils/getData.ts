@@ -13,7 +13,7 @@ export const getData = async (endpoint: string, options?: Options) => {
 		url = `${url}?${querys.join('&')}`
 	}
 	const response = await axios.get(url)
-	console.log(url);
+
 
 	return response.data
 }
