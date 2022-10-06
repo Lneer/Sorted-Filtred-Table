@@ -1,11 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import {
-  FilterConfig,
-  FilterField,
-  FilterMethod,
-  Tabledata,
-  TabledataProp,
-} from '../../types/types';
+import { FilterConfig, FilterField, FilterMethod, Tabledata } from '../../types/types';
+import { getFilteredArray } from '../../utils/getFilteredArray';
 import './filter.css';
 
 interface FilterProps {
@@ -21,7 +16,10 @@ const Filter: React.FC<FilterProps> = ({ data, onSorted = (sortedData) => {} }) 
   });
   const [filtredData, setFiltredData] = useState(data);
 
-  const memoizedonSorted = useCallback(() => onSorted(filtredData as Tabledata[]), [filtredData]);
+  const memoizedOnSorted = useCallback(
+    () => onSorted(filtredData as Tabledata[]),
+    [filtredData, onSorted]
+  );
 
   useEffect(() => {
     const filtredData = getFilteredArray(data, filterConfig);
@@ -29,8 +27,8 @@ const Filter: React.FC<FilterProps> = ({ data, onSorted = (sortedData) => {} }) 
   }, [filterConfig, data]);
 
   useEffect(() => {
-    memoizedonSorted();
-  }, [memoizedonSorted]);
+    memoizedOnSorted();
+  }, [memoizedOnSorted]);
 
   const changeField = (event: React.ChangeEvent<HTMLSelectElement>) => {
     SetFilterConfig({
@@ -54,35 +52,6 @@ const Filter: React.FC<FilterProps> = ({ data, onSorted = (sortedData) => {} }) 
       method: filterConfig.method,
       input: event.target.value,
     });
-  };
-
-  const getFilteredArray = (data?: Tabledata[], filterConfig?: FilterConfig) => {
-    if (!data) return;
-    if (!filterConfig) return [...data];
-    if (filterConfig.field === 'default' || filterConfig.method === 'default') {
-      return [...data];
-    }
-    switch (filterConfig.method) {
-      case 'equal':
-        return data.filter(
-          (elem) => elem[filterConfig.field as TabledataProp].toString() === filterConfig.input
-        );
-
-      case 'bigger':
-        return data.filter(
-          (elem) => elem[filterConfig.field as TabledataProp].toString() > filterConfig.input
-        );
-
-      case 'lesser':
-        return data.filter(
-          (elem) => elem[filterConfig.field as TabledataProp].toString() < filterConfig.input
-        );
-
-      case 'include':
-        return data.filter((elem) =>
-          elem[filterConfig.field as TabledataProp].toString().includes(filterConfig.input)
-        );
-    }
   };
 
   return (
