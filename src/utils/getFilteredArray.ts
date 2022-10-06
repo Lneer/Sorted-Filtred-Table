@@ -13,7 +13,7 @@ export const getFilteredArray = (data?: Tabledata[], filterConfig?: FilterConfig
 					if (typeof (elem[filterConfig.field as TabledataProp]) === 'number') {
 						return elem[filterConfig.field as TabledataProp] === Number(filterConfig.input)
 					}
-					else return elem[filterConfig.field as TabledataProp] === filterConfig.input
+					else return elem[filterConfig.field.toLocaleLowerCase() as TabledataProp] === filterConfig.input.toLocaleLowerCase()
 
 				}
 			);
@@ -24,7 +24,7 @@ export const getFilteredArray = (data?: Tabledata[], filterConfig?: FilterConfig
 					if (typeof (elem[filterConfig.field as TabledataProp]) === 'number') {
 						return elem[filterConfig.field as TabledataProp] > Number(filterConfig.input)
 					}
-					else return elem[filterConfig.field as TabledataProp] > filterConfig.input
+					else return elem[filterConfig.field.toLocaleLowerCase() as TabledataProp] > filterConfig.input.toLocaleLowerCase()
 				}
 			);
 
@@ -34,13 +34,13 @@ export const getFilteredArray = (data?: Tabledata[], filterConfig?: FilterConfig
 					if (typeof (elem[filterConfig.field as TabledataProp]) === 'number') {
 						return elem[filterConfig.field as TabledataProp] < Number(filterConfig.input)
 					}
-					else return elem[filterConfig.field as TabledataProp] < filterConfig.input
+					else return elem[filterConfig.field.toLocaleLowerCase() as TabledataProp] < filterConfig.input.toLocaleLowerCase()
 				}
 			);
 
 		case 'include':
 			return data.filter((elem) =>
-				elem[filterConfig.field as TabledataProp].toString().includes(filterConfig.input)
+				elem[filterConfig.field as TabledataProp].toString().toLocaleLowerCase().includes(filterConfig.input.toLocaleLowerCase())
 			);
 	}
 };
