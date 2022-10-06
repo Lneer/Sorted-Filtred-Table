@@ -5,10 +5,15 @@
 	width: 200px;
 	padding: 10px;
 }
-
+.filter input {
+	width: 100%;
+}
 .filter__options{
 	display: flex;
 	gap: 5px;
+}
+.method-select{
+	width: 50px;
 }
 .column-select{
 	width: 100%;

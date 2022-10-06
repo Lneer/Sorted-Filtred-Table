@@ -14,11 +14,11 @@ function App() {
   }, [currentPage]);
 
   return (
-    <>
+    <div className='App'>
       <Filter data={table} onSorted={(data) => setFiltredData(data)} />
       <Table tableData={filtredData} />
       <Pagination page={currentPage} limit={5} setPage={(page) => setCurrentPage(page)} />
-    </>
+    </div>
   );
 }
 

@@ -11,23 +11,23 @@ table{
 
 .table th{
 	padding: 5px;
-	border: 2px solid black;
+	border: 2px solid var(--border-dark);
 }
 
 .table th:hover {
-	background-color:#eee ;
+	background-color: var(--hover-light);
 	cursor: pointer;
 }
 
 tbody td {
   padding: 0.5em;
-  border-bottom: 1px solid #ccc;
-  border-right: 1px solid #ccc;
-  border-left: 1px solid #ccc;
+  border-bottom: 1px solid var(--border-light);
+  border-right: 1px solid var(--border-light);
+  border-left: 1px solid var(--border-light);
 }
 
 tbody tr:hover {
-  background-color: #eee;
+  background-color: var(--hover-light);
 }
 
 

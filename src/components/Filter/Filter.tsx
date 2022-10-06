@@ -69,7 +69,7 @@ const Filter: React.FC<FilterProps> = ({ data, onSorted = (sortedData) => {} }) 
       <label className="filter__options">
         <select
           name="column-select"
-          className="column-select"
+          className="method-select"
           onChange={(event) => changeMethod(event)}
         >
           <option value="default">---</option>

@@ -42,7 +42,7 @@ const Pagination: React.FC<PaginationProps> = ({ page = 1, limit = 5, setPage = 
   };
 
   return (
-    <div>
+    <div className='Pagination'>
       <button onClick={reset} disabled={isDisable(1)}>
         &lt;&lt;
       </button>
