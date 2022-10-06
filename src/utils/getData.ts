@@ -12,8 +12,17 @@ export const getData = async (endpoint: string, options?: Options) => {
 		const querys = keys.map((key) => `_${key}=${options[key as keyof Options]}`)
 		url = `${url}?${querys.join('&')}`
 	}
-	const response = await axios.get(url)
+	try {
+
+		const response = await axios.get(url)
+		return response.data
+
+	} catch (error) {
+		console.error('Не удалось подключиться к серверу');
+
+	}
 
 
-	return response.data
+
+
 }
