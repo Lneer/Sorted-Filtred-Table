@@ -1,7 +1,7 @@
 import { FilterConfig, Tabledata, TabledataProp } from "../types/types";
 
 export const getFilteredArray = (data?: Tabledata[], filterConfig?: FilterConfig) => {
-	if (!data) return;
+	if (!data || !data.length) return [];
 	if (!filterConfig) return [...data];
 	if (filterConfig.field === 'default' || filterConfig.method === 'default' || filterConfig.input === '') {
 		return [...data];
@@ -13,7 +13,7 @@ export const getFilteredArray = (data?: Tabledata[], filterConfig?: FilterConfig
 					if (typeof (elem[filterConfig.field as TabledataProp]) === 'number') {
 						return elem[filterConfig.field as TabledataProp] === Number(filterConfig.input)
 					}
-					else return elem[filterConfig.field.toLocaleLowerCase() as TabledataProp] === filterConfig.input.toLocaleLowerCase()
+					else return elem[filterConfig.field as TabledataProp].toString().toLowerCase() === filterConfig.input.toLowerCase()
 
 				}
 			);
@@ -24,7 +24,7 @@ export const getFilteredArray = (data?: Tabledata[], filterConfig?: FilterConfig
 					if (typeof (elem[filterConfig.field as TabledataProp]) === 'number') {
 						return elem[filterConfig.field as TabledataProp] > Number(filterConfig.input)
 					}
-					else return elem[filterConfig.field.toLocaleLowerCase() as TabledataProp] > filterConfig.input.toLocaleLowerCase()
+					else return elem[filterConfig.field.toLowerCase() as TabledataProp] > filterConfig.input.toLowerCase()
 				}
 			);
 
@@ -34,13 +34,13 @@ export const getFilteredArray = (data?: Tabledata[], filterConfig?: FilterConfig
 					if (typeof (elem[filterConfig.field as TabledataProp]) === 'number') {
 						return elem[filterConfig.field as TabledataProp] < Number(filterConfig.input)
 					}
-					else return elem[filterConfig.field.toLocaleLowerCase() as TabledataProp] < filterConfig.input.toLocaleLowerCase()
+					else return elem[filterConfig.field.toLowerCase() as TabledataProp] < filterConfig.input.toLowerCase()
 				}
 			);
 
 		case 'include':
 			return data.filter((elem) =>
-				elem[filterConfig.field as TabledataProp].toString().toLocaleLowerCase().includes(filterConfig.input.toLocaleLowerCase())
+				elem[filterConfig.field as TabledataProp].toString().toLowerCase().includes(filterConfig.input.toLowerCase())
 			);
 	}
 };

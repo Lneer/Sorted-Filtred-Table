@@ -1,30 +1,25 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { FilterConfig, FilterField, FilterMethod, Tabledata } from '../../types/types';
-import { getFilteredArray } from '../../utils/getFilteredArray';
+import { FilterConfig, FilterField, FilterMethod } from '../../types/types';
 import './filter.css';
 
 interface FilterProps {
-  data?: Tabledata[];
-  onSorted?: (sortedData: Tabledata[]) => void;
+  config?: FilterConfig;
+  setCurrentConfig?: (currentConfig: FilterConfig) => void;
 }
 
-const Filter: React.FC<FilterProps> = ({ data, onSorted = (sortedData) => {} }) => {
-  const [filterConfig, SetFilterConfig] = useState<FilterConfig>({
-    field: 'default',
-    method: 'default',
-    input: '',
-  });
-  const [filtredData, setFiltredData] = useState(data);
-
-  const memoizedOnSorted = useCallback(
-    () => onSorted(filtredData as Tabledata[]),
-    [filtredData, onSorted]
+const Filter: React.FC<FilterProps> = ({ config, setCurrentConfig = (currentConfig) => {} }) => {
+  const [filterConfig, SetFilterConfig] = useState<FilterConfig>(
+    config || {
+      field: 'default',
+      method: 'default',
+      input: '',
+    }
   );
 
-  useEffect(() => {
-    const filtredData = getFilteredArray(data, filterConfig);
-    setFiltredData(filtredData);
-  }, [filterConfig, data]);
+  const memoizedOnSorted = useCallback(
+    () => setCurrentConfig(filterConfig),
+    [filterConfig, setCurrentConfig]
+  );
 
   useEffect(() => {
     memoizedOnSorted();

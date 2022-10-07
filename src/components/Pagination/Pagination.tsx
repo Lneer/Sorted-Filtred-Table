@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import './pagination.css';
 
 interface PaginationProps {
@@ -9,32 +9,29 @@ interface PaginationProps {
 const Pagination: React.FC<PaginationProps> = ({ page = 1, limit = 5, setPage = (page) => {} }) => {
   const [currentPage, setCurrentPage] = useState<number>(page);
 
+  const memoizedSetPage = useCallback(
+    () => setPage(currentPage),
+    [currentPage, setPage]
+  );
+
+  useEffect(() => {
+    memoizedSetPage()
+  },[currentPage,memoizedSetPage])
+
   const increace = (): void => {
-    setCurrentPage((prev) => {
-      setPage(prev + 1);
-      return prev + 1;
-    });
+    setCurrentPage((prev) => prev + 1);
   };
 
   const decreace = (): void => {
-    setCurrentPage((prev) => {
-      setPage(prev - 1);
-      return prev - 1;
-    });
+    setCurrentPage((prev) => prev - 1);
   };
 
   const reset = () => {
-    setCurrentPage(() => {
-      setPage(1);
-      return 1;
-    });
+    setCurrentPage(1);
   };
 
   const setLimit = () => {
-    setCurrentPage(() => {
-      setPage(limit);
-      return limit;
-    });
+    setCurrentPage(limit);
   };
 
   const isDisable = (limit: number) => {
